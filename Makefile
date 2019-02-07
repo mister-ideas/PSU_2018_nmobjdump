@@ -7,9 +7,12 @@
 
 CC=				gcc
 
-SRC_NM=			nm.c
+SRC_NM=			src/nm/nm.c				\
+				src/nm/open_file.c		\
+				src/nm/file_mapping.c 	\
+				src/nm/symbols.c
 
-SRC_OBJDUMP=	objdump.c
+SRC_OBJDUMP=	src/objdump/objdump.c
 
 OBJ_NM=			$(SRC_NM:.c=.o)
 
@@ -21,7 +24,7 @@ NAME_OBJDUMP=	objdump
 
 CFLAGS=			-Wall -Wextra -Werror
 
-CPPFLAGS=		-I.
+CPPFLAGS=		-I include/
 
 RM=				rm -f
 
