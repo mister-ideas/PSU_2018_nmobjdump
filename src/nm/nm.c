@@ -7,6 +7,7 @@
 
 #include <stdlib.h>
 #include <unistd.h>
+#include <stdio.h>
 #include "nm.h"
 
 int launch_nm(char *filename, int multi)
@@ -21,7 +22,10 @@ int launch_nm(char *filename, int multi)
         return (0);
     file_mapping(nm64);
     symbols(nm64);
-    close(nm64->fd);
+    if (close(nm64->fd) == -1) {
+        dprintf(2, "nm: '%s': Can't close file\n", nm64->filename);
+        exit(84);
+    }
     free(nm64);
     return (1);
 }
