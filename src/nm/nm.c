@@ -8,11 +8,13 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <sys/mman.h>
 #include "nm.h"
 
 int launch_nm(char *filename, int multi)
 {
     nm64_t *nm64 = malloc(sizeof(nm64_t));
+    int size = 0;
 
     if (!nm64)
         exit(84);
@@ -20,12 +22,13 @@ int launch_nm(char *filename, int multi)
     nm64->multi = multi;
     if (open_file(nm64) == 0)
         return (0);
-    file_mapping(nm64);
+    size = file_mapping(nm64);
     symbols(nm64);
     if (close(nm64->fd) == -1) {
         dprintf(2, "nm: '%s': Can't close file\n", nm64->filename);
         exit(84);
     }
+    munmap(nm64->data, size);
     free(nm64);
     return (1);
 }

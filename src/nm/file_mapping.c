@@ -13,7 +13,7 @@
 #include <stdio.h>
 #include "nm.h"
 
-void file_mapping(nm64_t *nm64)
+int file_mapping(nm64_t *nm64)
 {
     struct stat s;
 
@@ -26,4 +26,5 @@ void file_mapping(nm64_t *nm64)
         dprintf(2, "nm: '%s': File mapping failed!\n", nm64->filename);
         exit(84);
     }
+    return (s.st_size);
 }

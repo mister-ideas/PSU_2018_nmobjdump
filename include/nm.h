@@ -30,7 +30,7 @@ int launch_nm(char *filename, int multi);
 int open_file(nm64_t *nm64);
 
 //file_mapping.c
-void file_mapping(nm64_t *nm64);
+int file_mapping(nm64_t *nm64);
 
 //symbols.c
 void symbols(nm64_t *nm64);
