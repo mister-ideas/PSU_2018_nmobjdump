@@ -34,7 +34,8 @@ void symbols(nm64_t *nm64)
     nm64->str_tab = (char *)(nm64->data + nm64->str_tab_sh->sh_offset);
     for (int i = 0; i < sym_nb; i++) {
         if (nm64->sym_tab[i].st_name != SHN_UNDEF
-        && nm64->sym_tab[i].st_info != STT_FILE)
-            printf("%s\n", nm64->str_tab + nm64->sym_tab[i].st_name);
+        && ELF64_ST_TYPE(nm64->sym_tab[i].st_info) != STT_FILE)
+            printf("%08ld %s\n", nm64->sym_tab[i].st_value,
+            nm64->str_tab + nm64->sym_tab[i].st_name);
     }
 }
