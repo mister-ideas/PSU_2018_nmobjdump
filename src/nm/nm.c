@@ -31,6 +31,7 @@ int launch_nm(char *filename, int multi)
         exit(84);
     }
     munmap(nm64->data, size);
+    free(nm64->sorted_sym_tab);
     free(nm64);
     return (1);
 }
