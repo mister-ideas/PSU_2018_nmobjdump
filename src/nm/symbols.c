@@ -71,7 +71,7 @@ void display_symbols(nm64_t *nm64)
                 printf("%016x", (unsigned)nm64->sorted_sym_tab[i].st_value);
             else
                 printf("                ");
-            printf("  %s\n", nm64->str_tab + nm64->sorted_sym_tab[i].st_name);
+            printf(" - %s\n", nm64->str_tab + nm64->sorted_sym_tab[i].st_name);
         }
     }
 }
