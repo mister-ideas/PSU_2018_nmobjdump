@@ -33,6 +33,14 @@ int open_file(nm64_t *nm64);
 int file_mapping(nm64_t *nm64);
 
 //symbols.c
-void symbols(nm64_t *nm64);
+void display_symbols(nm64_t *nm64);
+
+//check_file.c
+void check_magic(nm64_t *nm64);
+void check_is_supported(nm64_t *nm64);
+void check_file(nm64_t *nm64);
+
+//init_data.c
+void init_data(nm64_t *nm64);
 
 #endif /* !NM_H_ */

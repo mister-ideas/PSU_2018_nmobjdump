@@ -10,7 +10,9 @@ CC=				gcc
 SRC_NM=			src/nm/nm.c				\
 				src/nm/open_file.c		\
 				src/nm/file_mapping.c 	\
-				src/nm/symbols.c
+				src/nm/symbols.c		\
+				src/nm/check_file.c		\
+				src/nm/init_data.c
 
 SRC_OBJDUMP=	src/objdump/objdump.c
 

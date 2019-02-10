@@ -23,7 +23,9 @@ int launch_nm(char *filename, int multi)
     if (open_file(nm64) == 0)
         return (0);
     size = file_mapping(nm64);
-    symbols(nm64);
+    init_data(nm64);
+    check_file(nm64);
+    display_symbols(nm64);
     if (close(nm64->fd) == -1) {
         dprintf(2, "nm: '%s': Can't close file\n", nm64->filename);
         exit(84);
