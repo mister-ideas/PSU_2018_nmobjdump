@@ -67,10 +67,10 @@ void display_symbols(nm64_t *nm64)
     for (int i = 0; i < nm64->sym_nb; i++) {
         if (nm64->sorted_sym_tab[i].st_name != SHN_UNDEF
         && ELF64_ST_TYPE(nm64->sorted_sym_tab[i].st_info) != STT_FILE) {
-            if (nm64->sorted_sym_tab[i].st_value)
-                printf("%016x", (unsigned)nm64->sorted_sym_tab[i].st_value);
-            else
+            if (!nm64->sorted_sym_tab[i].st_value && nm64->elf->e_type == ET_EXEC)
                 printf("                ");
+            else
+                printf("%016x", (unsigned)nm64->sorted_sym_tab[i].st_value);
             printf(" - %s\n", nm64->str_tab + nm64->sorted_sym_tab[i].st_name);
         }
     }
