@@ -68,12 +68,12 @@ void display_symbols(nm64_t *nm64)
         if (nm64->sorted_sym_tab[i].st_name != SHN_UNDEF
         && ELF64_ST_TYPE(nm64->sorted_sym_tab[i].st_info) != STT_FILE) {
             if (!nm64->sorted_sym_tab[i].st_value
-            && (nm64->elf->e_type == ET_EXEC
-            || nm64->sorted_sym_tab[i].st_shndx == SHN_UNDEF))
+            && nm64->sorted_sym_tab[i].st_shndx == SHN_UNDEF)
                 printf("                ");
             else
                 printf("%016x", (unsigned)nm64->sorted_sym_tab[i].st_value);
-            printf(" - %s\n", nm64->str_tab + nm64->sorted_sym_tab[i].st_name);
+            printf(" %c %s\n", get_sym_type(nm64, nm64->sorted_sym_tab[i]),
+            nm64->str_tab + nm64->sorted_sym_tab[i].st_name);
         }
     }
 }

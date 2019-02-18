@@ -18,6 +18,7 @@ typedef struct nm64 {
     Elf64_Shdr *str_tab_sh;
     Elf64_Sym *sym_tab;
     Elf64_Sym *sorted_sym_tab;
+    char *sh_str_tab;
     char *str_tab;
     char *filename;
     int sym_nb;
@@ -39,6 +40,11 @@ char *convert_str(char *str);
 void compare_sym(nm64_t *nm64, int i, int j);
 void sort_sym_tab(nm64_t *nm64);
 void display_symbols(nm64_t *nm64);
+
+//types.c
+int check_sym_section(nm64_t *nm64, Elf64_Sym sym, const char *section);
+char get_sym_type_special(Elf64_Sym sym);
+char get_sym_type(nm64_t *nm64, Elf64_Sym sym);
 
 //check_file.c
 void check_magic(nm64_t *nm64);
