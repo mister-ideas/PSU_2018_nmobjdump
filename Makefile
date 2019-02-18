@@ -20,9 +20,9 @@ OBJ_NM=			$(SRC_NM:.c=.o)
 
 OBJ_OBJDUMP=	$(SRC_OBJDUMP:.c=.o)
 
-NAME_NM=		nm
+NAME_NM=		my_nm
 
-NAME_OBJDUMP=	objdump
+NAME_OBJDUMP=	my_objdump
 
 CFLAGS=			-Wall -Wextra -Werror
 
