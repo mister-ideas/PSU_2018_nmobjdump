@@ -12,19 +12,17 @@
 
 void init_data(nm64_t *nm64)
 {
-    char *str;
-
     nm64->elf = (Elf64_Ehdr *)nm64->data;
     if (!nm64->elf) {
         dprintf(2, "nm: %s: no ELF header\n", nm64->filename);
         exit(84);
     }
     nm64->sh = (Elf64_Shdr *)(nm64->data + nm64->elf->e_shoff);
-    str = (char *)(nm64->data + nm64->sh[nm64->elf->e_shstrndx].sh_offset);
+    nm64->sh_str_tab = (char *)(nm64->data + nm64->sh[nm64->elf->e_shstrndx].sh_offset);
     for (int i = 0; i < nm64->elf->e_shnum; i++) {
-        if (!strcmp(&str[nm64->sh[i].sh_name], ".strtab"))
+        if (!strcmp(&nm64->sh_str_tab[nm64->sh[i].sh_name], ".strtab"))
             nm64->str_tab_sh = (Elf64_Shdr *)&nm64->sh[i];
-        if (!strcmp(&str[nm64->sh[i].sh_name], ".symtab"))
+        if (!strcmp(&nm64->sh_str_tab[nm64->sh[i].sh_name], ".symtab"))
             nm64->sym_tab_sh = (Elf64_Shdr *)&nm64->sh[i];
     }
     if (nm64->str_tab_sh == SHN_UNDEF || nm64->sym_tab_sh == SHN_UNDEF) {
