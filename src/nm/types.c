@@ -8,13 +8,6 @@
 #include <string.h>
 #include "nm.h"
 
-int check_sym_section(nm64_t *nm64, Elf64_Sym sym, const char *section)
-{
-    if (!strcmp(&nm64->sh_str_tab[nm64->sh[sym.st_shndx].sh_name], section))
-        return (1);
-    return (0);
-}
-
 char get_sym_type_special(Elf64_Sym sym)
 {
     if (ELF64_ST_BIND(sym.st_info) == STB_WEAK) {
@@ -38,16 +31,21 @@ char get_sym_type(nm64_t *nm64, Elf64_Sym sym)
     char type = get_sym_type_special(sym);
     if (type != ' ')
         return (type);
-    if (check_sym_section(nm64, sym, ".bss"))
+    if (nm64->sh[sym.st_shndx].sh_type == SHT_NOBITS
+    && nm64->sh[sym.st_shndx].sh_flags == (SHF_ALLOC | SHF_WRITE))
         return (ELF64_ST_BIND(sym.st_info) == STB_LOCAL ? 'b' : 'B');
-    if (check_sym_section(nm64, sym, ".text")
-    || ELF64_ST_TYPE(sym.st_info) == STT_FUNC)
+    if (nm64->sh[sym.st_shndx].sh_type == SHT_INIT_ARRAY
+    || nm64->sh[sym.st_shndx].sh_type == SHT_FINI_ARRAY
+    || (nm64->sh[sym.st_shndx].sh_type == SHT_PROGBITS
+  	&& nm64->sh[sym.st_shndx].sh_flags == (SHF_ALLOC | SHF_EXECINSTR)))
         return (ELF64_ST_BIND(sym.st_info) == STB_LOCAL ? 't' : 'T');
-    if (check_sym_section(nm64, sym, ".rodata"))
+    if (nm64->sh[sym.st_shndx].sh_type == SHT_PROGBITS
+  	&& (nm64->sh[sym.st_shndx].sh_flags == (SHF_MERGE | SHF_ALLOC)
+    || nm64->sh[sym.st_shndx].sh_flags == SHF_ALLOC))
         return (ELF64_ST_BIND(sym.st_info) == STB_LOCAL ? 'r' : 'R');
-    if (check_sym_section(nm64, sym, ".data")
-    || ELF64_ST_TYPE(sym.st_info) == STT_NOTYPE
-    || ELF64_ST_TYPE(sym.st_info) == STT_OBJECT)
+    if (nm64->sh[sym.st_shndx].sh_type == SHT_DYNAMIC
+    || (nm64->sh[sym.st_shndx].sh_type == SHT_PROGBITS
+  	&& nm64->sh[sym.st_shndx].sh_flags == (SHF_ALLOC | SHF_WRITE)))
         return (ELF64_ST_BIND(sym.st_info) == STB_LOCAL ? 'd' : 'D');
     return (' ');
 }

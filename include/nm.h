@@ -42,7 +42,6 @@ void sort_sym_tab(nm64_t *nm64);
 void display_symbols(nm64_t *nm64);
 
 //types.c
-int check_sym_section(nm64_t *nm64, Elf64_Sym sym, const char *section);
 char get_sym_type_special(Elf64_Sym sym);
 char get_sym_type(nm64_t *nm64, Elf64_Sym sym);
 
