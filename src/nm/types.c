@@ -15,13 +15,13 @@ char get_sym_type_special(Elf64_Sym sym)
         ELF64_ST_TYPE(sym.st_info) == STT_OBJECT ? 'v' : 'w' :
         ELF64_ST_TYPE(sym.st_info) == STT_OBJECT ? 'V' : 'W');
     if (ELF64_ST_BIND(sym.st_info) == STB_GNU_UNIQUE)
-        return('u');
+        return ('u');
     if (sym.st_shndx == SHN_COMMON)
-        return('C');
+        return ('C');
     if (sym.st_shndx == SHN_ABS)
-        return('A');
+        return ('A');
     if (sym.st_shndx == SHN_UNDEF)
-        return('U');
+        return ('U');
     return (' ');
 }
 
