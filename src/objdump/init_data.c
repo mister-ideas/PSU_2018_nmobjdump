@@ -19,10 +19,8 @@ void init_data(objdump64_t *objdump64)
         if (!strcmp(&objdump64->sh_str_tab[objdump64->sh[i].sh_name], ".strtab"))
             objdump64->str_tab_sh = (Elf64_Shdr *)&objdump64->sh[i];
     }
-    if (objdump64->str_tab_sh == SHN_UNDEF) {
-        dprintf(2, "nm: '%s': no strings table\n", objdump64->filename);
-        exit(84);
+    if (objdump64->str_tab_sh != SHN_UNDEF) {
+        objdump64->str_tab = (char *)(objdump64->data
+        + objdump64->str_tab_sh->sh_offset);
     }
-    objdump64->str_tab = (char *)(objdump64->data
-    + objdump64->str_tab_sh->sh_offset);
 }

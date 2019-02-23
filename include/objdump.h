@@ -40,6 +40,7 @@ void check_file(objdump64_t *objdump64);
 void init_data(objdump64_t *objdump64);
 
 //display.c
+const char *get_flags(objdump64_t *objdump64);
 void display_header(objdump64_t *objdump64);
 void display_sections(objdump64_t *objdump64);
 void display(objdump64_t *objdump64);

@@ -21,7 +21,5 @@ int open_file(objdump64_t *objdump64)
             return (0);
         exit(84);
     }
-    if (objdump64->multi)
-        printf("\n%s:\n", objdump64->filename);
     return (1);
 }
