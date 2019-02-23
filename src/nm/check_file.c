@@ -22,7 +22,9 @@ void check_magic(nm64_t *nm64)
 
 void check_is_supported(nm64_t *nm64)
 {
-    if (nm64->elf->e_type != ET_REL && nm64->elf->e_type != ET_EXEC) {
+    if (nm64->elf->e_type != ET_REL
+    && nm64->elf->e_type != ET_EXEC
+    && nm64->elf->e_type != ET_DYN) {
 		dprintf(2, "nm: %s: file format not recognized\n", nm64->filename);
         exit(84);
 	}
