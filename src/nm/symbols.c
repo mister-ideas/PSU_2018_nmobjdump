@@ -14,8 +14,8 @@
 char *convert_str(char *str)
 {
     int j = 0;
-
     char *new_str = malloc(sizeof(char) * (strlen(str) + 1));
+
     if (!new_str)
         exit(84);
     for (int i = 0; str[i]; i++) {

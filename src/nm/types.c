@@ -29,6 +29,7 @@ char get_sym_type_special(Elf64_Sym sym)
 char get_sym_type(nm64_t *nm64, Elf64_Sym sym)
 {
     char type = get_sym_type_special(sym);
+
     if (type != ' ')
         return (type);
     if (nm64->sh[sym.st_shndx].sh_type == SHT_NOBITS
@@ -37,15 +38,15 @@ char get_sym_type(nm64_t *nm64, Elf64_Sym sym)
     if (nm64->sh[sym.st_shndx].sh_type == SHT_INIT_ARRAY
     || nm64->sh[sym.st_shndx].sh_type == SHT_FINI_ARRAY
     || (nm64->sh[sym.st_shndx].sh_type == SHT_PROGBITS
-  	&& nm64->sh[sym.st_shndx].sh_flags == (SHF_ALLOC | SHF_EXECINSTR)))
+    && nm64->sh[sym.st_shndx].sh_flags == (SHF_ALLOC | SHF_EXECINSTR)))
         return (ELF64_ST_BIND(sym.st_info) == STB_LOCAL ? 't' : 'T');
     if (nm64->sh[sym.st_shndx].sh_type == SHT_PROGBITS
-  	&& (nm64->sh[sym.st_shndx].sh_flags == (SHF_MERGE | SHF_ALLOC)
+    && (nm64->sh[sym.st_shndx].sh_flags == (SHF_MERGE | SHF_ALLOC)
     || nm64->sh[sym.st_shndx].sh_flags == SHF_ALLOC))
         return (ELF64_ST_BIND(sym.st_info) == STB_LOCAL ? 'r' : 'R');
     if (nm64->sh[sym.st_shndx].sh_type == SHT_DYNAMIC
     || (nm64->sh[sym.st_shndx].sh_type == SHT_PROGBITS
-  	&& nm64->sh[sym.st_shndx].sh_flags == (SHF_ALLOC | SHF_WRITE)))
+    && nm64->sh[sym.st_shndx].sh_flags == (SHF_ALLOC | SHF_WRITE)))
         return (ELF64_ST_BIND(sym.st_info) == STB_LOCAL ? 'd' : 'D');
     return (' ');
 }
