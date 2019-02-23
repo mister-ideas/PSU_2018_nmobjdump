@@ -21,8 +21,12 @@ void init_data(nm64_t *nm64)
         if (!strcmp(&nm64->sh_str_tab[nm64->sh[i].sh_name], ".symtab"))
             nm64->sym_tab_sh = (Elf64_Shdr *)&nm64->sh[i];
     }
-    if (nm64->str_tab_sh == SHN_UNDEF || nm64->sym_tab_sh == SHN_UNDEF) {
-        dprintf(2, "nm: %s: no strings and/or symbols table\n", nm64->filename);
+    if (nm64->sym_tab_sh == SHN_UNDEF) {
+        dprintf(2, "nm: %s: no symbols\n", nm64->filename);
+        exit(84);
+    }
+    if (nm64->str_tab_sh == SHN_UNDEF) {
+        dprintf(2, "nm: '%s': no strings table\n", nm64->filename);
         exit(84);
     }
 }
