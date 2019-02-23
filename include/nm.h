@@ -46,8 +46,8 @@ char get_sym_type_special(Elf64_Sym sym);
 char get_sym_type(nm64_t *nm64, Elf64_Sym sym);
 
 //check_file.c
-void check_magic(nm64_t *nm64);
-void check_is_supported(nm64_t *nm64);
+void check_elf(nm64_t *nm64);
+void check_architecture(nm64_t *nm64);
 void check_file(nm64_t *nm64);
 
 //init_data.c
