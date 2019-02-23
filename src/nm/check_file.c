@@ -18,7 +18,7 @@ void check_elf(nm64_t *nm64)
     || nm64->elf->e_ident[EI_MAG1] != ELFMAG1
     || nm64->elf->e_ident[EI_MAG2] != ELFMAG2
     || nm64->elf->e_ident[EI_MAG3] != ELFMAG3)) {
-        dprintf(2, "nm: %s: file format not recognized\n", nm64->filename);
+        dprintf(2, "nm: %s: File format not recognized\n", nm64->filename);
         exit(84);
     }
 }

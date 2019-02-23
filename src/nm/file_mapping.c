@@ -22,7 +22,7 @@ int file_mapping(nm64_t *nm64)
         exit(84);
     }
     if (S_ISDIR(s.st_mode)) {
-        dprintf(2, "nm: Warning: '%s' is a directory\n", nm64->filename);
+        dprintf(2, "nm: Warning: '%s' is not an ordinary file\n", nm64->filename);
         exit(84);
     }
     nm64->data = mmap(NULL, s.st_size, PROT_READ, MAP_PRIVATE, nm64->fd, 0);
