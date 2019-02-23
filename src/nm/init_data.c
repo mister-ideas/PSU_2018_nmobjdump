@@ -18,7 +18,8 @@ void init_data(nm64_t *nm64)
         exit(84);
     }
     nm64->sh = (Elf64_Shdr *)(nm64->data + nm64->elf->e_shoff);
-    nm64->sh_str_tab = (char *)(nm64->data + nm64->sh[nm64->elf->e_shstrndx].sh_offset);
+    nm64->sh_str_tab = (char *)(nm64->data
+    + nm64->sh[nm64->elf->e_shstrndx].sh_offset);
     for (int i = 0; i < nm64->elf->e_shnum; i++) {
         if (!strcmp(&nm64->sh_str_tab[nm64->sh[i].sh_name], ".strtab"))
             nm64->str_tab_sh = (Elf64_Shdr *)&nm64->sh[i];
