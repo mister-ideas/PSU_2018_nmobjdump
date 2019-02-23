@@ -12,11 +12,6 @@
 
 void init_data(nm64_t *nm64)
 {
-    nm64->elf = (Elf64_Ehdr *)nm64->data;
-    if (!nm64->elf) {
-        dprintf(2, "nm: %s: no ELF header\n", nm64->filename);
-        exit(84);
-    }
     nm64->sh = (Elf64_Shdr *)(nm64->data + nm64->elf->e_shoff);
     nm64->sh_str_tab = (char *)(nm64->data
     + nm64->sh[nm64->elf->e_shstrndx].sh_offset);

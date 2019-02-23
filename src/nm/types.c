@@ -10,11 +10,10 @@
 
 char get_sym_type_special(Elf64_Sym sym)
 {
-    if (ELF64_ST_BIND(sym.st_info) == STB_WEAK) {
+    if (ELF64_ST_BIND(sym.st_info) == STB_WEAK)
         return (!sym.st_value ?
         ELF64_ST_TYPE(sym.st_info) == STT_OBJECT ? 'v' : 'w' :
         ELF64_ST_TYPE(sym.st_info) == STT_OBJECT ? 'V' : 'W');
-    }
     if (ELF64_ST_BIND(sym.st_info) == STB_GNU_UNIQUE)
         return('u');
     if (sym.st_shndx == SHN_COMMON)
