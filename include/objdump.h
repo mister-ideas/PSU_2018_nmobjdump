@@ -21,6 +21,7 @@ typedef struct objdump64 {
 } objdump64_t;
 
 //objdump.c
+void display(objdump64_t *objdump64);
 int launch_objdump(char *filename, int multi);
 
 //open_file.c
@@ -37,10 +38,12 @@ void check_file(objdump64_t *objdump64);
 //init_data.c
 void init_data(objdump64_t *objdump64);
 
-//display.c
+//display_header.c
 const char *get_flags(objdump64_t *objdump64);
 void display_header(objdump64_t *objdump64);
+
+//display_sections.c
+void display_section(objdump64_t *objdump64);
 void display_sections(objdump64_t *objdump64);
-void display(objdump64_t *objdump64);
 
 #endif /* !OBJDUMP_H_ */

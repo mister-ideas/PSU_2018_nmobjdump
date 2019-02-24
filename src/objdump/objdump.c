@@ -11,6 +11,12 @@
 #include <sys/mman.h>
 #include "objdump.h"
 
+void display(objdump64_t *objdump64)
+{
+    display_header(objdump64);
+    display_sections(objdump64);
+}
+
 int launch_objdump(char *filename, int multi)
 {
     objdump64_t *objdump64 = malloc(sizeof(objdump64_t));

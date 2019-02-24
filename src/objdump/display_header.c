@@ -33,25 +33,3 @@ void display_header(objdump64_t *objdump64)
     printf("start address 0x%016lx\n\n", objdump64->elf->e_entry);
     return;
 }
-
-void display_sections(objdump64_t *objdump64)
-{
-    for (int i = 0; i < objdump64->elf->e_shnum; i++) {
-        if (!objdump64->sh_str_tab[objdump64->sh[i].sh_name]
-        || objdump64->sh[i].sh_type == SHT_SYMTAB
-        || objdump64->sh[i].sh_type == SHT_NOBITS
-        || objdump64->sh[i].sh_type == SHT_STRTAB
-        || objdump64->data
-        + objdump64->sh[i].sh_offset == objdump64->sh_str_tab)
-            continue;
-        printf("Contents of section %s:\n",
-        &(objdump64->sh_str_tab)[objdump64->sh[i].sh_name]);
-    }
-    return;
-}
-
-void display(objdump64_t *objdump64)
-{
-    display_header(objdump64);
-    display_sections(objdump64);
-}
