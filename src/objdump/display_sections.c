@@ -5,10 +5,12 @@
 ** display_sections
 */
 
+#include <stdio.h>
 #include "objdump.h"
 
 void display_section(objdump64_t *objdump64)
 {
+    (void)objdump64;
     return;
 }
 
