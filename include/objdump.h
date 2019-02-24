@@ -14,9 +14,7 @@ typedef struct objdump64 {
     void *data;
     Elf64_Ehdr *elf;
     Elf64_Shdr *sh;
-    Elf64_Shdr *str_tab_sh;
     char *sh_str_tab;
-    char *str_tab;
     char *filename;
     int fd;
     int multi;
