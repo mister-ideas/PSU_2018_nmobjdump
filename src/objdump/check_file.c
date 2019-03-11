@@ -18,7 +18,8 @@ void check_elf(objdump64_t *objdump64)
     || objdump64->elf->e_ident[EI_MAG1] != ELFMAG1
     || objdump64->elf->e_ident[EI_MAG2] != ELFMAG2
     || objdump64->elf->e_ident[EI_MAG3] != ELFMAG3)) {
-        dprintf(2, "objdump: %s: File format not recognized\n", objdump64->filename);
+        dprintf(2, "objdump: %s: File format not recognized\n",
+        objdump64->filename);
         exit(84);
     }
 }
@@ -26,7 +27,8 @@ void check_elf(objdump64_t *objdump64)
 void check_architecture(objdump64_t *objdump64)
 {
     if (objdump64->elf->e_ident[EI_CLASS] == ELFCLASS32) {
-        dprintf(2, "objdump: '%s': Unsupported architecture\n", objdump64->filename);
+        dprintf(2, "objdump: '%s': Unsupported architecture\n",
+        objdump64->filename);
         exit(84);
     }
 }
